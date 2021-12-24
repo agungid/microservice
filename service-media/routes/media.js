@@ -5,6 +5,24 @@ const base64Img = require('base64-img');
 
 const { Media } = require('../models');
 
+//List media
+router.get('/', async (req, res) => {
+  const media = await Media.findAll({
+    attributes: [ 'id', 'image' ]
+  });
+
+  const mappedMedia = media.map((m) => {
+    m.image = `${req.get('host')}/${m.image}`;
+    return m;
+  })
+
+  return res.json({
+    status: 'Success',
+    data: mappedMedia
+  });
+});
+
+// Store media
 router.post('/', (req, res) => {
   const image = req.body.image;
 
@@ -22,13 +40,12 @@ router.post('/', (req, res) => {
         'message': err.message
       });
     }
-
     // hasil filepath = /public/images/namafile.xx
     //ambil file nama filenya saja
     const filename = filepath.split('/').pop();
 
     // insert nama file ke database
-    const media = await Media.create({ image: `image/${filename}` });
+    const media = await Media.create({ image: `images/${filename}` });
 
     return res.json({
       status: 'Success',
@@ -37,7 +54,6 @@ router.post('/', (req, res) => {
         image: `${req.get('host')}/images/${filename}`
       }
     })
-
   });
 });
 
