@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('service-media:server');
 var http = require('http');
+var { PORT } = process.env;
 
 /**
  * Get port from environment and store in Express.
