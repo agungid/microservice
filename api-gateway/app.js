@@ -9,7 +9,7 @@ const usersRouter = require('./routes/users');
 const mediaRouter = require('./routes/media');
 const coursesRouter = require('./routes/courses');
 const ordersRouter = require('./routes/orders');
-
+const paymentsRouter = require('./routes/payments');
 
 const app = express();
 
@@ -24,5 +24,6 @@ app.use('/users', usersRouter);
 app.use('/media', mediaRouter);
 app.use('/courses', coursesRouter);
 app.use('/orders', ordersRouter);
+app.use('/payments',paymentsRouter);
 
 module.exports = app;
