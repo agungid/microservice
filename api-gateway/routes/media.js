@@ -5,6 +5,7 @@ const mediaHandler = require('./handler/media');
 /* GET users listing. */
 router.post('/', mediaHandler.create);
 router.get('/', mediaHandler.getAll);
+router.get('/:id', mediaHandler.getById);
 router.delete('/:id', mediaHandler.destroy);
 
 module.exports = router;
