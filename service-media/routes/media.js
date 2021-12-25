@@ -52,12 +52,34 @@ router.post('/', (req, res) => {
       status: 'Success',
       data: {
         id: media.id,
-        image: `${req.get('host')}/images/${filename}`
+        image: `${req.get('host')}/${filename}`
       }
     })
   });
 });
 
+// find by id
+router.get('/:id', async (req, res) => {
+  const id = req.params.id;
+  const media = await Media.findByPk(id);
+
+  if(!media) {
+    return res.status(404).json({
+      status: 'Error',
+      message: 'Media not found'
+    });
+  }
+
+  return res.json({
+    status: 'Success',
+    data: {
+      id: media.id,
+      image: `${req.get('host')}/${media.image}`
+    }
+  });
+})
+
+// delete media
 router.delete('/:id', async (req, res) => {
   const id = req.params.id;
 
