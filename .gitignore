@@ -1,3 +1,4 @@
 /api-gateway/node_modules
 /service-media/node_modules
+/service-user/node_modules
 /service-media/public/images
